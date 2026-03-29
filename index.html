@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validation in JS</title>
 </head>
+
 <body>
     <h1>Validation in JS</h1>
-    <form name="myform" onclick="myfunction()">
-        <label type="name" for="fname" >Enter Name here: </label>
-        <input type="text" name="fname"><br><br>
-        Enter your age: <input id="demo" type="number" min="18" required>
-        <button onclick="myfunction()">Submit</button>
+    <form name="myform" onsubmit="return myfunction()">
+        <label type="name" for="fname">Enter Name here: </label>
+        <input type="text" name="fname" id="name"><br><br>
+        <label type="number" for="age">Enter your Age: </label>
+        <input id="age" name="age" type="number" min="18" required>
+        <button type="submit">Submit</button>
     </form>
-    <p id="result"></p>
+    <div id="result"></p>
     <script>
-        function myfunction(){
-            var x = document.getElementById("demo").value;
-            var y = document.forms["myform"]["fname"].value;
-            var pattern = /^[A-Za-z]+$/
-            if (!x.checkValidity()) {
-                document.getElementById("result").innerHTML = x.validationMessage;
-                return false;
-            }
-            else if{
-                document.getElementById("result").innerHTML = "Successful!";
-                return true;
-            }
-            else (y == '') {
+        function myfunction() {
+            let isValid = true;
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age");
+            var pattern = /^[A-Za-z]+$/;
+            if (name == "") {
                 alert("The name must be filled.");
-                return false;
+                isValid = false;
             }
-
-            else if (pattern.test(x) == false) {
+            if (pattern.test(name)==false) {
                 alert("The name can only contain alphabets.");
+                isValid = false;
+            } if (!age.checkValidity()) {
+                document.getElementById("result").innerHTML = age.validationMessage;
+                isValid = false;
+            } 
+            if(isValid){
+                alert("Form Submitted Succesfully!");
                 return false;
+            }else{
+               return false;
             }
-
-            else document.write("Login Succesful!")
-
-            
         }
     </script>
 </body>
-</html>
 
+</html>
